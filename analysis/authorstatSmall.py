@@ -147,6 +147,7 @@ outfile = gzip.open("authorStat_small.txt.gz", 'w')
 
 
 # answer = []
+keys = []
 for idx, rawrow in enumerate(gzip.open( infileLocation, 'r'), start=1): #reader:
 #     if idx == 10000: break # limit for testing
     if idx%10000 == 0:
@@ -157,10 +158,17 @@ for idx, rawrow in enumerate(gzip.open( infileLocation, 'r'), start=1): #reader:
         sumData = summaryDictionary(ast.literal_eval(raw_articles))
         sumData["author"] = author
         if idx == 1: # write header
-            outfile.write("%s\n"%(",".join(sumData.keys())))
+            keys = [x for x in sumData.keys() if x not in ['author','zaffs']]
+            keys = ['author']+keys #+['zaffs']
+
+
+            # outfile.write("%s\n"%(",".join(sumData.keys())))
+            outfile.write("%s\n"%(",".join(keys)))
+
         if sumData['taap'] > 1 and sumData['tfap'] > 0 and sumData['scl'] > 0:
             #answer.append(sumData)
-            outfile.write("%s\n"%(",".join([str(x) for x in sumData.values()])))
+            vals  = [sumData[k] for k in keys]
+            outfile.write("%s\n"%(",".join([str(x) for x in vals])))
     except:
         print "error in index %d with author %s"%(idx, rawrow.split(',')[0])
 
