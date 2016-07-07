@@ -1,6 +1,8 @@
 cs109_firstOrPerish
 ===================
 
+[Final report is here.](https://github.com/shinwachi/cs109_firstOrPerish/blob/master/final_processbook/process_book.ipynb)
+
 CS109 Final Project: First Author or Perish
 
 Order of analysis (in iPynotebook):
